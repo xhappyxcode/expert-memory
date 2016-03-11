@@ -3,22 +3,24 @@ package entity;
 public class User {
     
     private int userid;
-    private String username, password;
-    
+    private String username, password, group;
+    /* add group */
     public User() {
         this.username = "Not Instantiated";
         this.password = "Not instantiated";
     }
     
-    public User(int id, String username, String password) {
+    public User(int id, String username, String password, String group) {
         this.userid = id;
         this.username = username;
         this.password = password;
+        this.group = group;
     }
     
-    public User(String username, String password) {
+    public User(String username, String password, String group) {
         this.username = username;
         this.password = password;
+        this.group = group;
     }
     
     public void setUsername(String username) {
@@ -49,6 +51,20 @@ public class User {
      */
     public void setUserid(int userid) {
         this.userid = userid;
+    }
+
+    /**
+     * @return the group
+     */
+    public String getGroup() {
+        return group;
+    }
+
+    /**
+     * @param group the group to set
+     */
+    public void setGroup(String group) {
+        this.group = group;
     }
     
 }
