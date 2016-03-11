@@ -24,6 +24,7 @@ public class CategoryDAO {
                 cat = new Category();
                 cat.setCategoryID(rs.getInt("categoryID"));
                 cat.setCategoryName(rs.getString("categoryName"));
+                cat.setCategoryDescription(rs.getString("description"));
                 result.add(cat);
             }
             rs.close();
@@ -45,9 +46,10 @@ public class CategoryDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             conn = myFactory.getConnection();
             
-            String query = "INSERT INTO category (categoryName) VALUES (?)";
+            String query = "INSERT INTO category (categoryName, categoryDescription) VALUES (?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, c.getCategoryName());
+            pstmt.setString(2, c.getCategoryDescription());
             int result = pstmt.executeUpdate();
             
             if(result == 1)

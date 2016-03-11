@@ -4,10 +4,12 @@ public class Category {
     
     private int categoryID;
     private String categoryName;
+    private String categoryDescription;
     
     public Category() {
-        categoryID = 0;
-        categoryName = "Not Initialized";
+        this.categoryID = 0;
+        this.categoryName = "Not Initialized";
+        this.categoryDescription = "Not Initialized";
     }
     
     public Category(String categoryName) {
@@ -29,6 +31,20 @@ public class Category {
     
     public String getCategoryName(){
         return categoryName;
+    }
+
+    /**
+     * @return the categoryDescription
+     */
+    public String getCategoryDescription() {
+        return categoryDescription;
+    }
+
+    /**
+     * @param categoryDescription the categoryDescription to set
+     */
+    public void setCategoryDescription(String categoryDescription) {
+        this.categoryDescription = categoryDescription;
     }
     
 }
