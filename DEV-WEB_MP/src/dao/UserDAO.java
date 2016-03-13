@@ -16,12 +16,29 @@ public class UserDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             conn = myFactory.getConnection();
             
+            conn.setAutoCommit(false);
+            
             String query = "INSERT INTO user (username, password) VALUES (?, ?)";
             
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPassword());
             int result = pstmt.executeUpdate();
+            
+            query = "SELECT userId FROM user WHERE username = ?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, user.getUsername());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()){
+                user.setUserid(rs.getInt("userId"));
+            }
+            
+            query = "INSERT INTO usergroup(userId, groupId, active) VALUES (?, ?, ?)";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, user.getUserid());
+            pstmt.setInt(2, user.getGroupId());
+            pstmt.setBoolean(3, true);
+            int result2 = pstmt.executeUpdate();
             
             pstmt.close();
             
@@ -31,7 +48,15 @@ public class UserDAO {
                 System.out.println("Your account has failed to be added!");
             }
             
+            conn.commit();
+            conn.close();
+            
         } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -47,6 +72,8 @@ public class UserDAO {
        try{
            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
            conn = myFactory.getConnection();
+           
+           conn.setAutoCommit(false);
 
            String query = "select * from user where username = ? and password = ?";
            PreparedStatement pstmt = conn.prepareStatement(query);
@@ -64,8 +91,15 @@ public class UserDAO {
 
            rs.close();
            pstmt.close();
- 
+           conn.commit();
+           conn.close();
+           
        }catch(SQLException ex){
+           try {
+               conn.rollback();
+           } catch (SQLException ex1) {
+               Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex1);
+           }
            java.util.logging.Logger.getLogger(DEVWEB_MP.class.getName()).log(Level.SEVERE, null, ex);
        } finally {
             try {

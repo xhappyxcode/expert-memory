@@ -17,6 +17,8 @@ public class CategoryDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             conn = myFactory.getConnection();
             
+            conn.setAutoCommit(false);
+            
             String query = "SELECT * FROM category";
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
@@ -29,7 +31,14 @@ public class CategoryDAO {
             }
             rs.close();
             pstmt.close();
+            conn.commit();
+            conn.close();
         } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
             try {

@@ -46,8 +46,14 @@ public class ProductDAO {
             }
             rs.close();
             pstmt.close();
+            conn.commit();
             conn.close();
         } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
             try {
@@ -96,8 +102,14 @@ public class ProductDAO {
             }
             rs.close();
             pstmt.close();
+            conn.commit();
             conn.close();
         } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
             try {
