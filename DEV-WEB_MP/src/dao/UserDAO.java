@@ -1,8 +1,10 @@
 package dao;
 
 import dev.web_mp.DEVWEB_MP;
+import entity.Group;
 import entity.User;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /* tried and tested  3/1/2016 */
@@ -39,6 +41,19 @@ public class UserDAO {
             pstmt.setInt(2, user.getGroupId());
             pstmt.setBoolean(3, true);
             int result2 = pstmt.executeUpdate();
+            
+            query = "SELECT rights.rightName FROM rights WHERE rights.rightId = "
+                    + "(SELECT groupright.rightId FROM groupright, groups "
+                    + "WHERE groupright.groupId = groups.groupId "
+                    + "AND groupright.active = 1) AND rights.active = 1";
+            pstmt = conn.prepareStatement(query);
+            rs = pstmt.executeQuery();
+            Group group = new Group();
+            ArrayList<String> rights = new ArrayList<String>();
+            while(rs.next()){
+                rights.add(rs.getString("rightName"));
+            }
+            group.setRights(rights);
             
             pstmt.close();
             
