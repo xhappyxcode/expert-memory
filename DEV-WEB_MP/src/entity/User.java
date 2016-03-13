@@ -2,25 +2,25 @@ package entity;
 
 public class User {
     
-    private int userid;
-    private String username, password, group;
-    /* add group */
+    private int userid, groupid;
+    private String username, password;
+    
     public User() {
         this.username = "Not Instantiated";
         this.password = "Not instantiated";
     }
     
-    public User(int id, String username, String password, String group) {
+    public User(int id, String username, String password, int group) {
         this.userid = id;
         this.username = username;
         this.password = password;
-        this.group = group;
+        this.groupid = groupid;
     }
     
-    public User(String username, String password, String group) {
+    public User(String username, String password, int group) {
         this.username = username;
         this.password = password;
-        this.group = group;
+        this.groupid = groupid;
     }
     
     public void setUsername(String username) {
@@ -56,15 +56,15 @@ public class User {
     /**
      * @return the group
      */
-    public String getGroup() {
-        return group;
+    public int getGroupId() {
+        return groupid;
     }
 
     /**
      * @param group the group to set
      */
-    public void setGroup(String group) {
-        this.group = group;
+    public void setGroupId(int group) {
+        this.groupid = group;
     }
     
 }
