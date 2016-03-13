@@ -9,6 +9,10 @@ public class Group {
     private String groupName;
     private boolean active;
     
+    public Group(){
+        
+    }
+    
     public Group(int groupId, String groupName, boolean active){
         this.groupId = groupId;
         this.groupName = groupName;
