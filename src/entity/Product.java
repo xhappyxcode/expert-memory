@@ -79,6 +79,13 @@ public class Product {
     public boolean isActive() {
         return active;
     }
+    
+    public int getStatus() {
+        if(active)
+            return 1;
+        else
+            return 0;
+    }
 
     /**
      * @param active the active to set
