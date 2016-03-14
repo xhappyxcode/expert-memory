@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Group {
     
-    private ArrayList<String> rights;
+    private ArrayList<Right> rights;
     private int groupId;
     private String groupName;
     private boolean active;
@@ -19,18 +19,18 @@ public class Group {
         this.active = active;
     }
     
-    public Group(int groupId, String groupName, boolean active, ArrayList<String> rights){
+    public Group(int groupId, String groupName, boolean active, ArrayList<Right> rights){
         this.groupId = groupId;
         this.groupName = groupName;
         this.active = active;
         this.rights = rights;
     }
 
-    public ArrayList<String> getRights() {
+    public ArrayList<Right> getRights() {
         return rights;
     }
 
-    public void setRights(ArrayList<String> rights) {
+    public void setRights(ArrayList<Right> rights) {
         this.rights = rights;
     }
 
