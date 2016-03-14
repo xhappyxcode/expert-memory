@@ -13,9 +13,9 @@ public class DEVWEB_MP {
         
         CategoryDAO catDao = new CategoryDAO();
         ArrayList<Category> catlist = catDao.getCategoryList();
-        for(int i = 0; i < catlist.size(); i++)
-            System.out.println(catlist.get(i).getCategoryID()+"\t"+
-                    catlist.get(i).getCategoryName());
+//        for(int i = 0; i < catlist.size(); i++)
+//            System.out.println(catlist.get(i).getCategoryID()+"\t"+
+//                    catlist.get(i).getCategoryName());
     }
     
 }
