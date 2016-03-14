@@ -120,4 +120,42 @@ public class ProductDAO {
         }
         return result;
     }
+    
+    public boolean changeStock(Product product) {
+        Connection conn = null;
+        boolean result = false;
+        try {
+            
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            conn = myFactory.getConnection();
+        
+            conn.setAutoCommit(false);
+            String query = "UPDATE product SET stock = ? WHERE productId = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, product.getStock());
+            pstmt.setInt(2, product.getProductID());
+            int num = pstmt.executeUpdate();
+            if(num == 1) {
+                result = true;
+            }
+            pstmt.close();
+            conn.commit();
+            conn.close();
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
+    
+    }
 }
