@@ -59,11 +59,11 @@ public class UserDAO {
             
             pstmt.close();
             
-            if(result == 1){
-                System.out.println("Your account has been added!");
-            } else {
-                System.out.println("Your account has failed to be added!");
-            }
+//            if(result == 1){
+//                System.out.println("Your account has been added!");
+//            } else {
+//                System.out.println("Your account has failed to be added!");
+//            }
             
             conn.commit();
             conn.close();
@@ -101,11 +101,12 @@ public class UserDAO {
            ResultSet rs = pstmt.executeQuery();
 
            if(rs.next()){
-               System.out.println("Sign in successful!");
+//               System.out.println("Sign in successful!");
                success = true;
-           } else{
-               System.out.println("Sign in not successful!");
-           }
+           } 
+//           else{
+//               System.out.println("Sign in not successful!");
+//           }
 
            rs.close();
            pstmt.close();

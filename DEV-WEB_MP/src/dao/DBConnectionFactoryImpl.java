@@ -12,7 +12,7 @@ public class DBConnectionFactoryImpl extends DBConnectionFactory{
             Class.forName(getDriverName());
             Connection con = DriverManager.getConnection(
                     getUrl(), getUsername(), getPassword());
-            System.out.println("Connected");
+//            System.out.println("Connected");
             return con;
         } catch (SQLException ex) {
             Logger.getLogger(DEVWEB_MP.class.getName()).log(Level.SEVERE, null, ex);
