@@ -12,8 +12,8 @@ public class UserDAO {
     
     private Connection conn;
     
-    public void SignUp(User user) {
-        
+    public Group SignUp(User user) {
+        Group group = new Group();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             conn = myFactory.getConnection();
@@ -42,13 +42,15 @@ public class UserDAO {
             pstmt.setBoolean(3, true);
             int result2 = pstmt.executeUpdate();
             
-            query = "SELECT rights.rightName FROM rights WHERE rights.rightId = "
-                    + "(SELECT groupright.rightId FROM groupright, groups "
-                    + "WHERE groupright.groupId = groups.groupId "
+            query = "SELECT rights.rightName FROM rights "
+                    + "WHERE rights.rightId IN "
+                    + "(SELECT groupright.rightId "
+                    + "FROM groupright "
+                    + "WHERE groupright.groupId = ? "
                     + "AND groupright.active = 1) AND rights.active = 1";
             pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, user.getGroupId());
             rs = pstmt.executeQuery();
-            Group group = new Group();
             ArrayList<String> rights = new ArrayList<String>();
             while(rs.next()){
                 rights.add(rs.getString("rightName"));
@@ -80,6 +82,7 @@ public class UserDAO {
                 Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        return group;
    }
    
    public boolean SignIn(User user) {
