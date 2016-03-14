@@ -51,7 +51,7 @@ public class UserDAO {
             pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, user.getGroupId());
             rs = pstmt.executeQuery();
-            ArrayList<String> rights = new ArrayList<String>();
+            ArrayList<String> rights = new ArrayList<String>(); //<-----THIS
             while(rs.next()){
                 rights.add(rs.getString("rightName"));
             }
