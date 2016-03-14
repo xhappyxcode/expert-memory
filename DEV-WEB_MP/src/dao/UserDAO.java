@@ -3,6 +3,7 @@ package dao;
 import dev.web_mp.DEVWEB_MP;
 import entity.Group;
 import entity.User;
+import entity.Right;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -51,9 +52,11 @@ public class UserDAO {
             pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, user.getGroupId());
             rs = pstmt.executeQuery();
-            ArrayList<String> rights = new ArrayList<String>(); //<-----THIS
+            ArrayList<Right> rights = new ArrayList<Right>();
+            Right r;
             while(rs.next()){
-                rights.add(rs.getString("rightName"));
+                r = new Right(rs.getInt("rightId"), rs.getString("rightName"), rs.getBoolean("active"));
+                rights.add(r);
             }
             group.setRights(rights);
             
