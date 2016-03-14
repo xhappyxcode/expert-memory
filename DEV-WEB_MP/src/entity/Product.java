@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Product {
     
-    private int productID;
+    private int productID, stock;
     private String productName, productDescription;
     private ArrayList<String> productCategory; 
     private String unit;
@@ -14,12 +14,13 @@ public class Product {
         
     }
     
-    public Product(int id, String name, String description, String unit, boolean active) {
+    public Product(int id, String name, String description, String unit, boolean active, int stock) {
         this.productID = id;
         this.productName = name;
         this.productDescription = description;
         this.unit = unit;
         this.active = active;
+        this.stock = stock;
     }
     
     public Product(String name, String description, ArrayList<String> category, String unit, boolean active) {
@@ -98,6 +99,20 @@ public class Product {
      */
     public void setProductDescription(String productDescription) {
         this.productDescription = productDescription;
+    }
+
+    /**
+     * @return the stock
+     */
+    public int getStock() {
+        return stock;
+    }
+
+    /**
+     * @param stock the stock to set
+     */
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
 }

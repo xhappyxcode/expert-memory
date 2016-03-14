@@ -61,8 +61,8 @@ public class CategoryDAO {
             pstmt.setString(2, c.getCategoryDescription());
             int result = pstmt.executeUpdate();
             
-            if(result == 1)
-                System.out.println("Category was added");
+//            if(result == 1)
+//                System.out.println("Category was added");
             
             pstmt.close();
         } catch (SQLException ex) {
